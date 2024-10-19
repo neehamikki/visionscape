@@ -8,8 +8,8 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             const img = document.createElement('img');
             img.src = e.target.result;
             img.classList.add('draggable-image');
-            img.style.top = `${Math.random() * 500}px`;
-            img.style.left = `${Math.random() * 700}px`;
+            img.style.top = `${Math.random() * (container.clientHeight - 100)}px`; // Adjust to prevent overflow
+            img.style.left = `${Math.random() * (container.clientWidth - 100)}px`; // Adjust to prevent overflow
             container.appendChild(img);
 
             makeDraggable(img);
@@ -27,8 +27,27 @@ function makeDraggable(element) {
         offsetY = e.clientY - element.offsetTop;
 
         function onMouseMove(e) {
-            element.style.left = `${e.clientX - offsetX}px`;
-            element.style.top = `${e.clientY - offsetY}px`;
+            // Calculate new position
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+
+            // Get the bounding rectangle of the canvas
+            const container = document.getElementById('canvas-container');
+            const containerRect = container.getBoundingClientRect();
+
+            // Check boundaries
+            if (newLeft < 0) newLeft = 0;
+            if (newTop < 0) newTop = 0;
+            if (newLeft + element.clientWidth > containerRect.width) {
+                newLeft = containerRect.width - element.clientWidth;
+            }
+            if (newTop + element.clientHeight > containerRect.height) {
+                newTop = containerRect.height - element.clientHeight;
+            }
+
+            // Update element's position
+            element.style.left = `${newLeft}px`;
+            element.style.top = `${newTop}px`;
         }
 
         document.addEventListener('mousemove', onMouseMove);
