@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Vision Board</title>
+    <style>
+        /* Styling for the canvas container */
+        #canvas-container {
+            border: 2px solid #333;
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        /* Styling for uploaded images, making them draggable */
+        .draggable-image {
+            position: absolute;
+            max-width: 100px;
+            max-height: 100px;
+            cursor: move;
+        }
+        /* Styling for the file upload button */
+        #upload-btn {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container where images will be placed -->
+    <div id="canvas-container"></div>
+
+    <!-- File upload input to allow users to select multiple images -->
+    <input type="file" id="upload-btn" multiple>
+
+    <!-- Linking the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
