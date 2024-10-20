@@ -1,6 +1,6 @@
 /* Container for the vision board */
 #canvas-container {
-    border: 2px solid #333;
+    border: 2px solid #8e5d34;
     width: 800px;
     height: 600px;
     margin: 20px auto;
@@ -24,8 +24,16 @@
     pointer-events: none;  /* Disables pointer events to prevent conflict with resizing */
 }
 
-/* File upload button */
-#upload-btn {
-    display: block;
-    margin: 20px auto;
+/* Style for the delete button */
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    z-index: 1000;
 }
