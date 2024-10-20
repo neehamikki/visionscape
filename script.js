@@ -11,7 +11,7 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             const img = document.createElement('img');
             img.src = e.target.result;
             img.classList.add('draggable-image');
-            
+
             const deleteBtn = document.createElement('div');
             deleteBtn.classList.add('delete-btn');
             deleteBtn.innerText = 'X';
@@ -22,6 +22,14 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             wrapper.appendChild(deleteBtn);
             wrapper.appendChild(img);
             container.appendChild(wrapper);
+
+            // Add popup window for the image
+            const popupWindow = createPopupWindow();
+
+            // Double-click event to show the popup
+            wrapper.addEventListener('dblclick', function() {
+                popupWindow.style.display = 'block';  // Show the popup window
+            });
 
             // Add event listener to highlight the wrapper when selected
             wrapper.addEventListener('click', function() {
@@ -50,4 +58,22 @@ function makeDraggableAndResizable(wrapper, img) {
             img.style.height = `${ui.size.height}px`;
         }
     });
+}
+
+// Function to create a popup window
+function createPopupWindow() {
+    const popupWindow = document.createElement('div');
+    popupWindow.classList.add('popup-window');
+
+    const closeBtn = document.createElement('div');
+    closeBtn.classList.add('popup-close-btn');
+    closeBtn.innerText = 'X';
+    closeBtn.addEventListener('click', function() {
+        popupWindow.style.display = 'none';  // Close the popup window
+    });
+
+    popupWindow.appendChild(closeBtn);
+    document.body.appendChild(popupWindow);
+
+    return popupWindow;
 }
