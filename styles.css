@@ -1,28 +1,11 @@
-/* Background to simulate a hole in the middle of the screen */
-body {
-    background-color: #8e5d34; /* The solid background color */
-    position: relative;
-    height: 100vh; /* Full viewport height */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevent scrolling */
-}
-
-/* Container with a "hole" effect in the center where images will be placed */
+/* Container for the vision board */
 #canvas-container {
-    border: none;
+    border: 2px solid #8e5d34;
     width: 800px;
     height: 600px;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: white;
-    overflow: hidden; /* Hides parts of images dragged outside the container */
-    box-shadow: 0 0 0 100vmax #8e5d34; /* Creates the illusion of a "hole" */
-    outline: 2px solid #8e5d34; /* Optional: visually marks the hole's border */
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden; /* Prevents images from showing outside the container */
 }
 
 /* Wrapper for draggable and resizable behavior */
