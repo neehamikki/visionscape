@@ -34,8 +34,8 @@
 /* Style for the delete button */
 .delete-btn {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -10px; /* Place the button slightly outside the top */
+    right: -10px; /* Place the button slightly outside the right */
     background-color: rgb(224, 123, 123);
     color: white;
     border-radius: 50%;
@@ -45,9 +45,15 @@
     line-height: 20px;
     font-size: 12px;
     cursor: pointer;
-    display: none;  /* Hidden by default */
-    z-index: 10;  /* Ensure it's above the image */
+    z-index: 100;  /* Ensure it's above the image and wrapper */
+    overflow: visible; /* Ensure it doesn't get clipped */
 }
+
+/* Ensure the delete button is fully visible when the image is selected */
+.draggable-resizable-wrapper.selected .delete-btn {
+    display: block;
+}
+
 
 /* Show the delete button when the wrapper is selected */
 .draggable-resizable-wrapper.selected .delete-btn {
