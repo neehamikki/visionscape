@@ -76,9 +76,7 @@
     display: none;  /* Initially hidden */
     padding: 10px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    overflow: hidden; /* Prevent overflow */
 }
-
 
 /* Style for the close button in the popup window */
 .popup-close-btn {

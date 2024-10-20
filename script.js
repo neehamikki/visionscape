@@ -98,8 +98,8 @@ function makeDraggableAndResizable(wrapper, img) {
 
 
 
-// Function to create a popup window with a textarea for user input
-function createPopupWindow() {
+// Function to create a popup window and display the selected image
+function createPopupWindow(imageSrc) {
     const popupWindow = document.createElement('div');
     popupWindow.classList.add('popup-window');
 
@@ -111,21 +111,17 @@ function createPopupWindow() {
         popupWindow.style.display = 'none';  // Close the popup window
     });
 
-    // Create a textarea for user input
-    const textarea = document.createElement('textarea');
-    textarea.placeholder = "Type your notes here..."; // Placeholder text
-    textarea.style.width = '100%';
-    textarea.style.height = '80%';
-    textarea.style.margin = '10px'; // Add margins
-    textarea.style.boxSizing = 'border-box'; // Include padding and border in width/height
-    textarea.style.resize = 'none'; // Prevent resizing of the textarea
+    // Create image to display in the popup window
+    const popupImg = document.createElement('img');
+    popupImg.src = imageSrc;
+    popupImg.style.width = '100%';
+    popupImg.style.height = 'auto';
 
-    // Append the textarea and close button to the popup window
+    // Append image and close button to popup window
     popupWindow.appendChild(closeBtn);
-    popupWindow.appendChild(textarea);
+    popupWindow.appendChild(popupImg);
 
     document.body.appendChild(popupWindow);  // Append popup to body (not canvas-container)
 
     return popupWindow;
 }
-
