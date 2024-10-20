@@ -23,8 +23,8 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             wrapper.appendChild(img);
             container.appendChild(wrapper);
 
-            // Add popup window for the image
-            const popupWindow = createPopupWindow(img.src); // Pass image source to popup window
+            // Create empty popup window
+            const popupWindow = createPopupWindow();
 
             // Double-click event to show the popup
             wrapper.addEventListener('dblclick', function() {
@@ -44,6 +44,7 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
     }
 });
 
+
 function makeDraggableAndResizable(wrapper, img) {
     // Use jQuery UI to make the wrapper draggable and resizable
     $(wrapper).draggable({
@@ -54,37 +55,51 @@ function makeDraggableAndResizable(wrapper, img) {
         containment: '#canvas-container',  // Prevent resizing outside the container
         resize: function(event, ui) {
             // Update img size to fit inside the wrapper
-            img.style.width = `${ui.size.width}px`;
-            img.style.height = `${ui.size.height}px`;
+            const wrapperWidth = ui.size.width;
+            const wrapperHeight = ui.size.height;
+
+            // Calculate the new image dimensions
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            let newWidth = wrapperWidth;
+            let newHeight = wrapperHeight;
+
+            // Resize the image based on the wrapper dimensions
+            if (newWidth / aspectRatio > newHeight) {
+                newWidth = newHeight * aspectRatio; // Fit by height
+            } else {
+                newHeight = newWidth / aspectRatio; // Fit by width
+            }
+
+            img.style.width = `${newWidth}px`;
+            img.style.height = `${newHeight}px`;
         }
     });
 
-    // Ensure the image is initially resized to fit within the container's dimensions
+    // Initially set image size to fit within the wrapper
     const container = document.getElementById('canvas-container');
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
+    const wrapperWidth = wrapper.clientWidth;
+    const wrapperHeight = wrapper.clientHeight;
 
-    // Resize the wrapper and image to fit within the container, if necessary
     const aspectRatio = img.naturalWidth / img.naturalHeight;
-    let newWidth = containerWidth;
-    let newHeight = newWidth / aspectRatio;
+    let newWidth = wrapperWidth;
+    let newHeight = wrapperHeight;
 
-    // If the height exceeds the container height, adjust the size
-    if (newHeight > containerHeight) {
-        newHeight = containerHeight;
-        newWidth = newHeight * aspectRatio;
+    // Calculate the dimensions to ensure both width and height fit
+    if (newWidth / aspectRatio > newHeight) {
+        newWidth = newHeight * aspectRatio; // Fit by height
+    } else {
+        newHeight = newWidth / aspectRatio; // Fit by width
     }
 
-    // Set the size of the wrapper and image
-    wrapper.style.width = `${newWidth}px`;
-    wrapper.style.height = `${newHeight}px`;
+    // Set the size of the image
     img.style.width = `${newWidth}px`;
     img.style.height = `${newHeight}px`;
 }
 
 
-// Function to create a popup window and display the selected image
-function createPopupWindow(imageSrc) {
+
+// Function to create a popup window with a textarea for user input
+function createPopupWindow() {
     const popupWindow = document.createElement('div');
     popupWindow.classList.add('popup-window');
 
@@ -96,17 +111,21 @@ function createPopupWindow(imageSrc) {
         popupWindow.style.display = 'none';  // Close the popup window
     });
 
-    // Create image to display in the popup window
-    const popupImg = document.createElement('img');
-    popupImg.src = imageSrc;
-    popupImg.style.width = '100%';
-    popupImg.style.height = 'auto';
+    // Create a textarea for user input
+    const textarea = document.createElement('textarea');
+    textarea.placeholder = "Type your notes here..."; // Placeholder text
+    textarea.style.width = '100%';
+    textarea.style.height = '80%';
+    textarea.style.margin = '10px'; // Add margins
+    textarea.style.boxSizing = 'border-box'; // Include padding and border in width/height
+    textarea.style.resize = 'none'; // Prevent resizing of the textarea
 
-    // Append image and close button to popup window
+    // Append the textarea and close button to the popup window
     popupWindow.appendChild(closeBtn);
-    popupWindow.appendChild(popupImg);
+    popupWindow.appendChild(textarea);
 
     document.body.appendChild(popupWindow);  // Append popup to body (not canvas-container)
 
     return popupWindow;
 }
+
