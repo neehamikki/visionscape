@@ -10,6 +10,7 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             img.classList.add('draggable-image');
             img.style.top = `${Math.random() * (container.clientHeight - 100)}px`; // Adjust to prevent overflow
             img.style.left = `${Math.random() * (container.clientWidth - 100)}px`; // Adjust to prevent overflow
+            //random positioning should try not to be on top of another
             container.appendChild(img);
 
             makeDraggable(img);
@@ -55,5 +56,12 @@ function makeDraggable(element) {
         element.addEventListener('mouseup', function() {
             document.removeEventListener('mousemove', onMouseMove);
         }, { once: true });
+    });
+}
+
+// Beginning work to delete an image
+function deleteImg(element){
+    element.addEventListener('click', (event) => {
+        event.target.remove();
     });
 }
