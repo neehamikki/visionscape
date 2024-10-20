@@ -23,8 +23,8 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             wrapper.appendChild(img);
             container.appendChild(wrapper);
 
-            // Create empty popup window
-            const popupWindow = createPopupWindow();
+            // Add popup window for the image
+            const popupWindow = createPopupWindow(img.src); // Pass image source to popup window
 
             // Double-click event to show the popup
             wrapper.addEventListener('dblclick', function() {
@@ -44,7 +44,6 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
     }
 });
 
-
 function makeDraggableAndResizable(wrapper, img) {
     // Use jQuery UI to make the wrapper draggable and resizable
     $(wrapper).draggable({
@@ -55,47 +54,33 @@ function makeDraggableAndResizable(wrapper, img) {
         containment: '#canvas-container',  // Prevent resizing outside the container
         resize: function(event, ui) {
             // Update img size to fit inside the wrapper
-            const wrapperWidth = ui.size.width;
-            const wrapperHeight = ui.size.height;
-
-            // Calculate the new image dimensions
-            const aspectRatio = img.naturalWidth / img.naturalHeight;
-            let newWidth = wrapperWidth;
-            let newHeight = wrapperHeight;
-
-            // Resize the image based on the wrapper dimensions
-            if (newWidth / aspectRatio > newHeight) {
-                newWidth = newHeight * aspectRatio; // Fit by height
-            } else {
-                newHeight = newWidth / aspectRatio; // Fit by width
-            }
-
-            img.style.width = `${newWidth}px`;
-            img.style.height = `${newHeight}px`;
+            img.style.width = `${ui.size.width}px`;
+            img.style.height = `${ui.size.height}px`;
         }
     });
 
-    // Initially set image size to fit within the wrapper
+    // Ensure the image is initially resized to fit within the container's dimensions
     const container = document.getElementById('canvas-container');
-    const wrapperWidth = wrapper.clientWidth;
-    const wrapperHeight = wrapper.clientHeight;
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
 
+    // Resize the wrapper and image to fit within the container, if necessary
     const aspectRatio = img.naturalWidth / img.naturalHeight;
-    let newWidth = wrapperWidth;
-    let newHeight = wrapperHeight;
+    let newWidth = containerWidth;
+    let newHeight = newWidth / aspectRatio;
 
-    // Calculate the dimensions to ensure both width and height fit
-    if (newWidth / aspectRatio > newHeight) {
-        newWidth = newHeight * aspectRatio; // Fit by height
-    } else {
-        newHeight = newWidth / aspectRatio; // Fit by width
+    // If the height exceeds the container height, adjust the size
+    if (newHeight > containerHeight) {
+        newHeight = containerHeight;
+        newWidth = newHeight * aspectRatio;
     }
 
-    // Set the size of the image
+    // Set the size of the wrapper and image
+    wrapper.style.width = `${newWidth}px`;
+    wrapper.style.height = `${newHeight}px`;
     img.style.width = `${newWidth}px`;
     img.style.height = `${newHeight}px`;
 }
-
 
 
 // Function to create a popup window and display the selected image

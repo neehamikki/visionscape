@@ -1,6 +1,6 @@
 /* Container for the vision board */
 #canvas-container {
-    border: 15px solid #9b694d;
+    border: 10px solid #9b694d;
     background-color: #d4b19d;
     width: 800px;
     height: 600px;
@@ -94,5 +94,4 @@
     cursor: pointer;
     z-index: 30;  /* Ensure it stays on top of the popup window */
 }
-
 
