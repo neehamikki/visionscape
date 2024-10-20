@@ -21,19 +21,10 @@
     width: 100%; /* Set width and height to auto-adjust based on the wrapper */
     height: 100%;
     object-fit: contain;  /* Ensures the image fits without breaking aspect ratio */
-    pointer-events: none;  /* Disables pointer events to prevent conflict with resizing */
 }
 
-/* Style for the delete button */
-.delete-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 5px;
-    z-index: 1000;
+/* File upload button */
+#upload-btn {
+    display: block;
+    margin: 20px auto;
 }
