@@ -14,21 +14,6 @@
     max-width: 100px;
     max-height: 100px;
     cursor: move;
-    aspect-ratio: auto; /* Ensures aspect ratio is respected */
-    resize: both;
-    overflow: hidden;
-}
-
-/* For resizing handles */
-.ui-resizable-handle {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: blue;
-    z-index: 90;
-}
-.ui-resizable-nw, .ui-resizable-ne, .ui-resizable-sw, .ui-resizable-se {
-    background-color: transparent;
 }
 
 /* File upload button */
