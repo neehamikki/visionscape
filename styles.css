@@ -1,6 +1,6 @@
 /* Container for the vision board */
 #canvas-container {
-    border: 2px solid #8e5d34;
+    border: 2px solid #333;
     width: 800px;
     height: 600px;
     margin: 20px auto;
@@ -21,6 +21,7 @@
     width: 100%; /* Set width and height to auto-adjust based on the wrapper */
     height: 100%;
     object-fit: contain;  /* Ensures the image fits without breaking aspect ratio */
+    pointer-events: none;  /* Disables pointer events to prevent conflict with resizing */
 }
 
 /* File upload button */

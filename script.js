@@ -12,38 +12,26 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             img.src = e.target.result;
             img.classList.add('draggable-image');
             
-            img.onload = function() {
-                const naturalWidth = img.naturalWidth;
-                const naturalHeight = img.naturalHeight;
-                
-                // Set the initial size of the image to 1/16th of its natural size
-                const scaledWidth = naturalWidth / 4;
-                const scaledHeight = naturalHeight / 4;
+            wrapper.appendChild(img);
+            container.appendChild(wrapper);
 
-                // Apply the scaled dimensions to the wrapper
-                wrapper.style.width = `${scaledWidth}px`;
-                wrapper.style.height = `${scaledHeight}px`;
-
-                // Append the image to its wrapper
-                wrapper.appendChild(img);
-                container.appendChild(wrapper);
-
-                // Enable dragging and resizing with the aspect ratio locked
-                makeDraggableAndResizable(wrapper, img);
-            };
+            // Make image draggable and resizable with aspect ratio lock
+            makeDraggableAndResizable(wrapper, img);
         };
         reader.readAsDataURL(files[i]);
     }
 });
 
 function makeDraggableAndResizable(wrapper, img) {
+    // Use jQuery UI to make the wrapper draggable and resizable
     $(wrapper).draggable({
-        containment: '#canvas-container',
+        containment: '#canvas-container',  // Keep the wrapper inside the canvas container
     }).resizable({
-        aspectRatio: true,
-        handles: 'n, e, s, w, se',
-        containment: '#canvas-container',
+        aspectRatio: true,  // Maintain aspect ratio during resizing
+        handles: 'n, e, s, w, se',  // Allow resizing from corners and edges
+        containment: '#canvas-container',  // Prevent resizing outside the container
         resize: function(event, ui) {
+            // Update img size to fill the wrapper
             img.style.width = `${ui.size.width}px`;
             img.style.height = `${ui.size.height}px`;
         }
