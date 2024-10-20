@@ -24,7 +24,7 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             container.appendChild(wrapper);
 
             // Add popup window for the image
-            const popupWindow = createPopupWindow();
+            const popupWindow = createPopupWindow(img.src); // Pass image source to popup window
 
             // Double-click event to show the popup
             wrapper.addEventListener('dblclick', function() {
@@ -60,11 +60,12 @@ function makeDraggableAndResizable(wrapper, img) {
     });
 }
 
-// Function to create a popup window
-function createPopupWindow() {
+// Function to create a popup window and display the selected image
+function createPopupWindow(imageSrc) {
     const popupWindow = document.createElement('div');
     popupWindow.classList.add('popup-window');
 
+    // Create close button
     const closeBtn = document.createElement('div');
     closeBtn.classList.add('popup-close-btn');
     closeBtn.innerText = 'X';
@@ -72,8 +73,17 @@ function createPopupWindow() {
         popupWindow.style.display = 'none';  // Close the popup window
     });
 
+    // Create image to display in the popup window
+    const popupImg = document.createElement('img');
+    popupImg.src = imageSrc;
+    popupImg.style.width = '100%';
+    popupImg.style.height = 'auto';
+
+    // Append image and close button to popup window
     popupWindow.appendChild(closeBtn);
-    document.body.appendChild(popupWindow);
+    popupWindow.appendChild(popupImg);
+
+    document.body.appendChild(popupWindow);  // Append popup to body (not canvas-container)
 
     return popupWindow;
 }
