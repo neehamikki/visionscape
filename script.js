@@ -14,7 +14,7 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
 
             const deleteBtn = document.createElement('div');
             deleteBtn.classList.add('delete-btn');
-            deleteBtn.innerText = 'X';
+            deleteBtn.innerText = '';
             deleteBtn.addEventListener('click', function() {
                 container.removeChild(wrapper);  // Remove the image wrapper
             });
@@ -68,7 +68,7 @@ function createPopupWindow(imageSrc) {
     // Create close button
     const closeBtn = document.createElement('div');
     closeBtn.classList.add('popup-close-btn');
-    closeBtn.innerText = 'X';
+    closeBtn.innerText = '';
     closeBtn.addEventListener('click', function() {
         popupWindow.style.display = 'none';  // Close the popup window
     });

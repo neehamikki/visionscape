@@ -1,6 +1,7 @@
 /* Container for the vision board */
 #canvas-container {
     border: 10px solid #9b694d;
+    background-color: #b98b71;
     width: 800px;
     height: 600px;
     margin: 20px auto;
@@ -58,10 +59,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 300px;
-    height: 450px;
+    width: 600px;
+    height: 900px;
     background-color: white;
-    border: 2px solid #333;
+    border: 2px solid white;
     transform: translate(-50%, -50%);
     z-index: 20;  /* Ensure it stays above other elements */
     display: none;  /* Initially hidden */
@@ -74,7 +75,7 @@
     position: absolute;
     top: -10px;
     right: -10px;
-    background-color: red;
+    background-color: rgb(224, 123, 123);
     color: white;
     border-radius: 50%;
     width: 20px;
