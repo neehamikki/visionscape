@@ -1,7 +1,7 @@
 /* Container for the vision board */
 #canvas-container {
     border: 10px solid #9b694d;
-    background-color: #b98b71;
+    background-color: #d4b19d;
     width: 800px;
     height: 600px;
     margin: 20px auto;
@@ -19,10 +19,18 @@
 
 /* Style for draggable and resizable images */
 .draggable-image {
-    width: 100%; /* Set width and height to auto-adjust based on the wrapper */
+    width: 100%;
     height: 100%;
     object-fit: contain;  /* Ensures the image fits without breaking aspect ratio */
+    max-width: 100%;      /* Prevents the image from growing beyond the wrapper */
+    max-height: 100%;     /* Prevents the image from growing beyond the wrapper */
     pointer-events: none;  /* Disables pointer events to prevent conflict with resizing */
+}
+
+/* Additional styles to ensure wrapper doesn't overflow the container */
+.draggable-resizable-wrapper {
+    max-width: 100%;      /* Ensure wrapper fits within the container */
+    max-height: 100%;     /* Ensure wrapper fits within the container */
 }
 
 /* File upload button */
@@ -34,8 +42,8 @@
 /* Style for the delete button */
 .delete-btn {
     position: absolute;
-    top: -10px; /* Place the button slightly outside the top */
-    right: -10px; /* Place the button slightly outside the right */
+    top: -10px;
+    right: -10px;
     background-color: rgb(224, 123, 123);
     color: white;
     border-radius: 50%;
@@ -45,15 +53,9 @@
     line-height: 20px;
     font-size: 12px;
     cursor: pointer;
-    z-index: 100;  /* Ensure it's above the image and wrapper */
-    overflow: visible; /* Ensure it doesn't get clipped */
+    display: none;  /* Hidden by default */
+    z-index: 10;  /* Ensure it's above the image */
 }
-
-/* Ensure the delete button is fully visible when the image is selected */
-.draggable-resizable-wrapper.selected .delete-btn {
-    display: block;
-}
-
 
 /* Show the delete button when the wrapper is selected */
 .draggable-resizable-wrapper.selected .delete-btn {

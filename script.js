@@ -53,12 +53,35 @@ function makeDraggableAndResizable(wrapper, img) {
         handles: 'n, e, s, w, se',  // Allow resizing from corners and edges
         containment: '#canvas-container',  // Prevent resizing outside the container
         resize: function(event, ui) {
-            // Update img size to fill the wrapper
+            // Update img size to fit inside the wrapper
             img.style.width = `${ui.size.width}px`;
             img.style.height = `${ui.size.height}px`;
         }
     });
+
+    // Ensure the image is initially resized to fit within the container's dimensions
+    const container = document.getElementById('canvas-container');
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    // Resize the wrapper and image to fit within the container, if necessary
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
+    let newWidth = containerWidth;
+    let newHeight = newWidth / aspectRatio;
+
+    // If the height exceeds the container height, adjust the size
+    if (newHeight > containerHeight) {
+        newHeight = containerHeight;
+        newWidth = newHeight * aspectRatio;
+    }
+
+    // Set the size of the wrapper and image
+    wrapper.style.width = `${newWidth}px`;
+    wrapper.style.height = `${newHeight}px`;
+    img.style.width = `${newWidth}px`;
+    img.style.height = `${newHeight}px`;
 }
+
 
 // Function to create a popup window and display the selected image
 function createPopupWindow(imageSrc) {
