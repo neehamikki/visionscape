@@ -12,8 +12,22 @@ document.getElementById('upload-btn').addEventListener('change', function(event)
             img.src = e.target.result;
             img.classList.add('draggable-image');
             
+            const deleteBtn = document.createElement('div');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.innerText = 'X';
+            deleteBtn.addEventListener('click', function() {
+                container.removeChild(wrapper);  // Remove the image wrapper
+            });
+
+            wrapper.appendChild(deleteBtn);
             wrapper.appendChild(img);
             container.appendChild(wrapper);
+
+            // Add event listener to highlight the wrapper when selected
+            wrapper.addEventListener('click', function() {
+                document.querySelectorAll('.draggable-resizable-wrapper').forEach(el => el.classList.remove('selected'));
+                wrapper.classList.add('selected');
+            });
 
             // Make image draggable and resizable with aspect ratio lock
             makeDraggableAndResizable(wrapper, img);
