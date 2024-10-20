@@ -1,5 +1,3 @@
-/* styles.css */
-
 /* Container for the vision board */
 #canvas-container {
     border: 2px solid #333;
@@ -10,34 +8,30 @@
     overflow: hidden; /* Prevents images from showing outside the container */
 }
 
-/* Style for draggable images */
+/* Style for draggable and resizable images */
 .draggable-image {
     position: absolute;
     max-width: 100px;
     max-height: 100px;
     cursor: move;
-}
-
-/* Used to change the size of the image */
-/*https://stackoverflow.com/questions/54263429/how-to-resize-image-in-webpage-with-mouse*/
-.resizable {
-    display: inline-block;
-    background: black;
+    aspect-ratio: auto; /* Ensures aspect ratio is respected */
     resize: both;
     overflow: hidden;
-    line-height: 0;
-}
-  
-.resizable img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
-/* Ensuring that the aspect ratio stays the same */
-/* https://www.sitepoint.com/community/t/maintain-aspect-ratio-while-resizing/406455/8 */
+/* For resizing handles */
+.ui-resizable-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    z-index: 90;
+}
+.ui-resizable-nw, .ui-resizable-ne, .ui-resizable-sw, .ui-resizable-se {
+    background-color: transparent;
+}
 
-/* Style for the file upload button */
+/* File upload button */
 #upload-btn {
     display: block;
     margin: 20px auto;
