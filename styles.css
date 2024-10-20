@@ -11,15 +11,14 @@
 /* Wrapper for draggable and resizable behavior */
 .draggable-resizable-wrapper {
     position: absolute;
-    max-width: 100px;
-    max-height: 100px;
     cursor: move;
     overflow: hidden;  /* Ensures the image doesn't overflow the wrapper */
+    display: inline-block; /* Helps with resizing */
 }
 
 /* Style for draggable and resizable images */
 .draggable-image {
-    width: 100%;
+    width: 100%; /* Set width and height to auto-adjust based on the wrapper */
     height: 100%;
     object-fit: contain;  /* Ensures the image fits without breaking aspect ratio */
     pointer-events: none;  /* Disables pointer events to prevent conflict with resizing */

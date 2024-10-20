@@ -31,9 +31,9 @@ function makeDraggableAndResizable(wrapper, img) {
         handles: 'n, e, s, w, se',  // Allow resizing from corners and edges
         containment: '#canvas-container',  // Prevent resizing outside the container
         resize: function(event, ui) {
-            // Adjust the img size to fit within the wrapper, maintaining aspect ratio
-            img.style.width = '100%';
-            img.style.height = '100%';
+            // Update img size to fill the wrapper
+            img.style.width = `${ui.size.width}px`;
+            img.style.height = `${ui.size.height}px`;
         }
     });
 }
